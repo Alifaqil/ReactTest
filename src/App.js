@@ -6,25 +6,6 @@ import "./App.css";
 export default function App() {
   const [title, dispatch] = useReducer(titleReducer, initialTitle);
 
-  function changets(obj) {
-    dispatch({
-      type: "change",
-      title: obj.title,
-      subtitle: obj.subtitle,
-      style: obj.style,
-    });
-  }
-  const textOne = {
-    title: "Alif",
-    subtitle: "Programmer di AIA",
-    style: { color: "red", backgroundColor: "black" },
-  };
-  const texttwo = {
-    title: "Mega",
-    subtitle: "Programmer juga di AIA",
-    style: { color: "yellow", backgroundColor: "blue" },
-  };
-
   return (
     <div className="App">
       <Title
@@ -34,14 +15,18 @@ export default function App() {
       />
       <Button
         onClick={() => {
-          changets(textOne);
+          dispatch({
+            type: "change 1",
+          });
         }}
       >
         Change Title
       </Button>
       <Button
         onClick={() => {
-          changets(texttwo);
+          dispatch({
+            type: "change 2",
+          });
         }}
       >
         Change Style
@@ -57,12 +42,20 @@ const initialTitle = {
 
 function titleReducer(title, action) {
   switch (action.type) {
-    case "change": {
+    case "change 1": {
       return {
         ...title,
-        title: action.title,
-        subtitle: action.subtitle,
-        style: action.style,
+        title: "Alif",
+        subtitle: "Programmer di AIA",
+        style: { color: "red", backgroundColor: "black" },
+      };
+    }
+    case "change 2": {
+      return {
+        ...title,
+        title: "Mega",
+        subtitle: "Programmer juga di AIA",
+        style: { color: "yellow", backgroundColor: "blue" },
       };
     }
     default: {
