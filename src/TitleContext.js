@@ -1,30 +1,25 @@
 import { createContext, useReducer } from "react";
 
+export function TitleProvider({ children }) {
+  const [data, dispatch] = useReducer(titleReducer, initialTitle);
+
+  return (
+    <TitleContext.Provider value={{ data }}>
+      <TitleDispatch.Provider value={{ dispatch }}>
+        {children}
+      </TitleDispatch.Provider>
+    </TitleContext.Provider>
+  );
+}
+export const TitleContext = createContext(null);
+export const TitleDispatch = createContext(null);
+
 const initialTitle = {
   title: "Hello",
   subtitle: "Welcome back",
   style: {},
 };
 
-export const TitleContext = createContext(initialTitle);
-export const TitleDispatch = createContext(null);
-export function TitleProvider({ children }) {
-  const [data, dispatch] = useReducer(titleReducer, initialTitle);
-
-  return (
-    <TitleContext.Provider
-      value={{
-        title: data.title,
-        subtitle: data.subtitle,
-        style: data.sytle,
-      }}
-    >
-      <TitleDispatch.Provider value={dispatch}>
-        {children}
-      </TitleDispatch.Provider>
-    </TitleContext.Provider>
-  );
-}
 function titleReducer(title, action) {
   switch (action.type) {
     case "change1": {

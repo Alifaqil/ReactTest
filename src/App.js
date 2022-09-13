@@ -1,21 +1,17 @@
-import { useReducer, useContext } from "react";
+import { useContext } from "react";
 import Title from "./Title";
 import Button from "./Button";
 import "./App.css";
-import { TitleProvider, TitleContext, TitleDispatch } from "./TitleContext";
+import { TitleProvider, TitleContext, TitleDispatch } from "./TitleContext.js";
 
 export default function App() {
   // const [title, dispatch] = useReducer(titleReducer, initialTitle);
-  const title = useContext(TitleContext);
+  const data = useContext(TitleContext);
   const dispatch = useContext(TitleDispatch);
   return (
     <TitleProvider>
       <div className="App">
-        <Title
-          title={title.title}
-          subtitle={title.subtitle}
-          style={title.style}
-        />
+        <Title title={data.title} subtitle={data.subtitle} style={data.style} />
         <Button
           onClick={() => {
             dispatch({ type: "change1" });
