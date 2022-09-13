@@ -1,21 +1,18 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import Title from "./Title";
 import Button from "./Button";
 import "./App.css";
 
 export default function App() {
-  const [ctitle, setcTitle] = useState({
-    title: "Hello",
-    subtitle: "Welcome back",
-    style: {},
-  });
+  const [title, dispatch] = useReducer(titleReducer, initialTitle);
+
   function changets(obj) {
-    setcTitle((ctitle) => ({
-      ...ctitle,
+    dispatch({
+      type: "change",
       title: obj.title,
       subtitle: obj.subtitle,
       style: obj.style,
-    }));
+    });
   }
   const textOne = {
     title: "Alif",
@@ -31,9 +28,9 @@ export default function App() {
   return (
     <div className="App">
       <Title
-        title={ctitle.title}
-        subtitle={ctitle.subtitle}
-        style={ctitle.style}
+        title={title.title}
+        subtitle={title.subtitle}
+        style={title.style}
       />
       <Button
         onClick={() => {
@@ -51,4 +48,25 @@ export default function App() {
       </Button>
     </div>
   );
+}
+const initialTitle = {
+  title: "Hello",
+  subtitle: "Welcome back",
+  style: {},
+};
+
+function titleReducer(title, action) {
+  switch (action.type) {
+    case "change": {
+      return {
+        ...title,
+        title: action.title,
+        subtitle: action.subtitle,
+        style: action.style,
+      };
+    }
+    default: {
+      throw Error("Unknown action: " + action.type);
+    }
+  }
 }
