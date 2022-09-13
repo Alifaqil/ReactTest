@@ -10,7 +10,7 @@ export default function App() {
   const dispatch = useContext(TitleDispatch);
   return (
     <TitleProvider>
-      <div className="App">
+      <>
         <Title title={data.title} subtitle={data.subtitle} style={data.style} />
         <Button
           onClick={() => {
@@ -26,7 +26,7 @@ export default function App() {
         >
           Change Style
         </Button>
-      </div>
+      </>
     </TitleProvider>
   );
 }

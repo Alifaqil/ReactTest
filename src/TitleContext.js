@@ -1,18 +1,19 @@
 import { createContext, useReducer } from "react";
 
+export const TitleContext = createContext(null);
+export const TitleDispatch = createContext(null);
+
 export function TitleProvider({ children }) {
   const [data, dispatch] = useReducer(titleReducer, initialTitle);
 
   return (
-    <TitleContext.Provider value={{ data }}>
-      <TitleDispatch.Provider value={{ dispatch }}>
+    <TitleContext.Provider value={data}>
+      <TitleDispatch.Provider value={dispatch}>
         {children}
       </TitleDispatch.Provider>
     </TitleContext.Provider>
   );
 }
-export const TitleContext = createContext(null);
-export const TitleDispatch = createContext(null);
 
 const initialTitle = {
   title: "Hello",
