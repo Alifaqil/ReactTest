@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Title from "./Title";
 import Button from "./Button";
-import "./App.css";
+import "./styles.css";
 
-export default function App() {
+export default function Changetitle() {
   const [ctitle, setcTitle] = useState({
     title: "Hello",
     subtitle: "Welcome back",
